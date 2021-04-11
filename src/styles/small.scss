@@ -1,0 +1,18 @@
+/*
+  General
+*/
+#root {
+  display: grid;
+  min-height: 100vh;
+}
+/*
+  Header Component
+*/
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  background-color: grey;
+}
