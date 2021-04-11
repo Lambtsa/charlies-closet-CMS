@@ -3,12 +3,67 @@
 */
 #root {
   display: grid;
+  grid-template-rows: auto 1fr auto;
   min-height: 100vh;
+}
+main {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  align-items: center;
+  justify-content: center;
+}
+.content__container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 /*
   Header Component
 */
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  background-color: grey;
+}
+/*
+  SideBar Component
+*/
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: pink;
+  width: 100%;
+  padding: 1rem;
+}
+/*
+  ItemCard Component
+*/
+.itemCard {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  text-align: left;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 2px $grey;
+}
+.itemCard__img {
+  width: 200px;
+}
+/*
+  Footer Component
+*/
+.footer {
   display: flex;
   align-items: center;
   justify-content: center;
