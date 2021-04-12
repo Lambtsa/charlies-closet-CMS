@@ -10,9 +10,7 @@ const Items = () => {
   useEffect(async () => {
     try {
       const response = await getAllItems();
-      console.log(response);
       const data = await response.json();
-      console.log(data);
       setItemList(data);
     } catch (err) {
       setError(true);

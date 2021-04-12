@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ItemCard = ({ itemDetails }) => {
   const dateOptions = {
@@ -10,14 +11,12 @@ const ItemCard = ({ itemDetails }) => {
 
   return (
     <>
-      <button className="itemCard" type="button">
-        <img className="itemCard__img" src={itemDetails.itemImages[0]} alt={itemDetails.itemTitle} />
-        <div className="itemCard__details">
-          <h3 className="itemCard__title">{itemDetails.itemTitle}</h3>
-          <p className="itemCard__subtitle">{itemDetails.itemDescription}</p>
-        </div>
+      <Link to={`/items/${itemDetails._id}`} className="itemCard">
+        <h3 className="itemCard__title">{itemDetails.itemTitle}</h3>
         <p className="itemCard__date">{formattedDate}</p>
-      </button>
+        <button className="itemCard__btn" type="button">Edit</button>
+        <button className="itemCard__btn" type="button">Delete</button>
+      </Link>
     </>
   );
 };

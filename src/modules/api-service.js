@@ -4,6 +4,9 @@ const baseUrl = process.env.NODE_ENV === 'production'
 
 const getAllItems = () => fetch(`${baseUrl}/api/items`);
 
+const getItemById = itemId => fetch(`${baseUrl}/api/items/${itemId}`);
+
 module.exports = {
   getAllItems,
+  getItemById,
 };
