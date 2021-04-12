@@ -13,9 +13,8 @@ const ItemCard = ({ itemDetails }) => {
     <>
       <Link to={`/items/${itemDetails._id}`} className="itemCard">
         <h3 className="itemCard__title">{itemDetails.itemTitle}</h3>
+        <p className="itemCard__date">{itemDetails.itemCategory}</p>
         <p className="itemCard__date">{formattedDate}</p>
-        <Link to={`/items/${itemDetails._id}/edit`} className="itemCard__btn">Edit</Link>
-        <button className="itemCard__btn" type="button">Delete</button>
       </Link>
     </>
   );

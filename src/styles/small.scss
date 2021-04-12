@@ -53,20 +53,25 @@ main {
 */
 .btn__container {
   display: flex;
-  gap: 1rem;
   width: 100%;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
-  padding: 2rem 0;
-  border-top: 1px solid lighten($grey, 20%);
+  // margin-top: 1rem;
+  padding: 1rem 0;
+  // border-top: 1px solid lighten($grey, 20%);
+  &--right {
+    display: flex;
+    gap: 1rem;
+  }
 }
-.btn__primary {
+.btn {
   display: inline-block;
   padding: .7rem 1rem;
   font-weight: 700;
   font-size: .9rem;
   border-radius: 10px;
+}
+.btn__primary {
   border: 3px solid $black;
   background-color: $black;
   color: $white;
@@ -77,17 +82,22 @@ main {
   }
 }
 .btn__secondary {
-  display: inline-block;
-  padding: .7rem 1rem;
-  font-weight: 700;
-  font-size: .9rem;
-  border-radius: 10px;
   border: 3px solid $grey;
   background-color: $grey;
   color: $white;
   &:hover {
     background-color: darken($grey, 10%);
     border: 3px solid darken($grey, 10%);
+    color: $white;
+  }
+}
+.btn__delete {
+  border: 3px solid $red;
+  background-color: $red;
+  color: $white;
+  &:hover {
+    background-color: darken($red, 10%);
+    border: 3px solid darken($red, 10%);
     color: $white;
   }
 }
@@ -119,8 +129,7 @@ main {
 */
 .itemCard {
   display: grid;
-  grid-template-columns: 1fr 1fr repeat(2, auto);
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
   color: $black;
   width: 100%;
   border-radius: 10px;
@@ -129,6 +138,12 @@ main {
   padding: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0 0 2px $grey;
+  :first-child {
+    text-align: left;
+  }
+  :last-child {
+    text-align: right;
+  }
 }
 .itemCard__btn {
   &:hover {

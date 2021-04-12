@@ -101,8 +101,8 @@ const NewItem = () => {
           <option value="autumn">Autumn</option>
         </select>
         <div className="btn__container">
-          <button className="btn__secondary" type="button" onClick={() => history.goBack()}>Cancel</button>
-          <button className="btn__primary" type="submit">Save</button>
+          <button className="btn btn__secondary" type="button" onClick={() => history.goBack()}>Cancel</button>
+          <button className="btn btn__primary" type="submit">Save</button>
         </div>
       </form>
       {error && <SnackBar state={error} setState={setError} type="error" message="There has been an error." />}

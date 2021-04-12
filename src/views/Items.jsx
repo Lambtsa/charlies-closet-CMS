@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getAllItems } from '../modules/api-service';
 
 import ItemCard from '../components/ItemCard';
+import SnackBar from '../components/SnackBar';
 
 const Items = () => {
   const [itemList, setItemList] = useState([]);
@@ -11,8 +12,14 @@ const Items = () => {
   useEffect(async () => {
     try {
       const response = await getAllItems();
-      const data = await response.json();
-      setItemList(data);
+      if (!response.ok) {
+        setItemList([]);
+        setError(true);
+      } else {
+        const data = await response.json();
+        console.log(data);
+        setItemList(data);
+      }
     } catch (err) {
       setError(true);
     }
@@ -20,11 +27,11 @@ const Items = () => {
 
   return (
     <>
-      {!error && itemList.map(item => <ItemCard itemDetails={item} key={item._id} />)}
+      {!error && itemList && itemList.map(item => <ItemCard itemDetails={item} key={item._id} />)}
       <div className="btn__container">
-        <Link className="btn__primary" to="/new-item">Add new</Link>
+        <Link className="btn btn__primary" to="/new-item">Add new</Link>
       </div>
-      {error && <p>There has been an error</p>}
+      {error && <SnackBar state={error} setState={setError} type="error" message="There are no items yet." />}
     </>
   );
 };

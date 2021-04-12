@@ -22,9 +22,17 @@ const updateItemById = (itemId, itemObj) => fetch(`${baseUrl}/api/items/${itemId
   body: JSON.stringify(itemObj),
 });
 
+const deleteItemById = itemId => fetch(`${baseUrl}/api/items/${itemId}`, {
+  method: 'DELETE',
+  headers: {
+    'Content-type': 'application/json',
+  },
+});
+
 module.exports = {
   getAllItems,
   getItemById,
   addNewItem,
   updateItemById,
+  deleteItemById,
 };

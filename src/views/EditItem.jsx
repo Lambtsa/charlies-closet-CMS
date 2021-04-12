@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { updateItemById, getItemById } from '../modules/api-service';
+import { updateItemById, getItemById, deleteItemById } from '../modules/api-service';
 
 import SnackBar from '../components/SnackBar';
 
@@ -52,16 +52,35 @@ const EditItem = () => {
         itemCategory: category,
         itemSeason: season,
       };
-      console.log(newItem);
       const response = await updateItemById(id, newItem);
       if (response.ok) {
         setError(false);
         history.push({
           pathname: '/items',
-          state: {
-            isValid: true,
-            validationMessage: 'Your item has been successfully added.',
-          },
+          // state: {
+          //   isValid: true,
+          //   validationMessage: 'Your item has been successfully added.',
+          // },
+        });
+      } else {
+        setError(true);
+      }
+    } catch (err) {
+      setError(true);
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      const response = await deleteItemById(id);
+      if (response.ok) {
+        setError(false);
+        history.push({
+          pathname: '/items',
+          // state: {
+          //   isValid: true,
+          //   validationMessage: 'Your item has been successfully added.',
+          // },
         });
       } else {
         setError(true);
@@ -119,8 +138,11 @@ const EditItem = () => {
           <option value="autumn">Autumn</option>
         </select>
         <div className="btn__container">
-          <button className="btn__secondary" type="button" onClick={() => history.goBack()}>Cancel</button>
-          <button className="btn__primary" type="submit">Save</button>
+          <button className="btn btn__delete" type="button" onClick={handleDeleteClick}>Delete</button>
+          <div className="btn__container--right">
+            <button className="btn btn__secondary" type="button" onClick={() => history.goBack()}>Cancel</button>
+            <button className="btn btn__primary" type="submit">Save</button>
+          </div>
         </div>
       </form>
       {error && <SnackBar state={error} setState={setError} type="error" message="There has been an error." />}
