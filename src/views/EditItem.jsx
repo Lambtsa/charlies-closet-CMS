@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { addNewItem, getItemById } from '../modules/api-service';
+import { updateItemById, getItemById } from '../modules/api-service';
 
 import SnackBar from '../components/SnackBar';
 
@@ -52,7 +52,8 @@ const EditItem = () => {
         itemCategory: category,
         itemSeason: season,
       };
-      const response = await addNewItem(newItem);
+      console.log(newItem);
+      const response = await updateItemById(id, newItem);
       if (response.ok) {
         setError(false);
         history.push({

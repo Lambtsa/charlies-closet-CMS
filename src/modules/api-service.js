@@ -14,8 +14,17 @@ const addNewItem = itemObj => fetch(`${baseUrl}/api/items`, {
   body: JSON.stringify(itemObj),
 });
 
+const updateItemById = (itemId, itemObj) => fetch(`${baseUrl}/api/items/${itemId}`, {
+  method: 'PUT',
+  headers: {
+    'Content-type': 'application/json',
+  },
+  body: JSON.stringify(itemObj),
+});
+
 module.exports = {
   getAllItems,
   getItemById,
   addNewItem,
+  updateItemById,
 };
