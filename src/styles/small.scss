@@ -53,6 +53,7 @@ main {
 */
 .btn__container {
   display: flex;
+  gap: 1rem;
   width: 100%;
   justify-content: flex-end;
   align-items: center;
@@ -62,14 +63,32 @@ main {
 }
 .btn__primary {
   display: inline-block;
-  padding: 1rem;
+  padding: .7rem 1rem;
   font-weight: 700;
   font-size: .9rem;
   border-radius: 10px;
+  border: 3px solid $black;
   background-color: $black;
   color: $white;
   &:hover {
     background-color: lighten($black, 10%);
+    border: 3px solid lighten($black, 10%);
+    color: $white;
+  }
+}
+.btn__secondary {
+  display: inline-block;
+  padding: .7rem 1rem;
+  font-weight: 700;
+  font-size: .9rem;
+  border-radius: 10px;
+  border: 3px solid $grey;
+  background-color: $grey;
+  color: $white;
+  &:hover {
+    background-color: darken($grey, 10%);
+    border: 3px solid darken($grey, 10%);
+    color: $white;
   }
 }
 /*

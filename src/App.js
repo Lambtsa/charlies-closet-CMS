@@ -20,6 +20,7 @@ import NewItem from './views/NewItem';
 import Boxes from './views/Boxes';
 import Sales from './views/Sales';
 import NotFound from './views/NotFound';
+import EditItem from './views/EditItem';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/items" component={Items} />
             <Route exact path="/new-item" component={NewItem} />
             <Route exact path="/items/:id" component={ItemsDetails} />
+            <Route exact path="/items/:id/edit" component={EditItem} />
             <Route exact path="/boxes" component={Boxes} />
             <Route exact path="/sales" component={Sales} />
             <Route exact path="/dashboard" component={Dashboard} />

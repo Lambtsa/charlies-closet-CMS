@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { addNewItem } from '../modules/api-service';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { addNewItem, getItemById } from '../modules/api-service';
 
 import SnackBar from '../components/SnackBar';
 
-const NewItem = () => {
+const EditItem = () => {
+  const { id } = useParams();
   const history = useHistory();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -14,6 +15,22 @@ const NewItem = () => {
   const [category, setCategory] = useState('');
   const [season, setSeason] = useState('');
   const [error, setError] = useState(false);
+
+  useEffect(async () => {
+    try {
+      const response = await getItemById(id);
+      const data = await response.json();
+      setTitle(data.itemTitle);
+      setDescription(data.itemDescription);
+      setImageUrl(data.itemImages[0]);
+      setGender(data.itemGender);
+      setSize(data.itemSize);
+      setCategory(data.itemCategory);
+      setSeason(data.itemSeason);
+    } catch (err) {
+      setError(true);
+    }
+  }, []);
 
   const handleTitleChange = e => setTitle(e.target.value);
   const handleDescriptionChange = e => setDescription(e.target.value);
@@ -110,4 +127,4 @@ const NewItem = () => {
   );
 };
 
-export default NewItem;
+export default EditItem;
