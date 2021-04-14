@@ -78,7 +78,7 @@ const ImageSlot = props => {
       )}
       {imageUrl === '' && (
         <div className="input__img-wrapper--empty">
-          <input className="ImageSlot__input" type="file" onChange={handleFileChange} accept="image/png, image/jpeg" />
+          <input className="ImageSlot__input" type="file" onChange={handleFileChange} accept="image/png, image/jpeg" multiple={false} />
           <div className="ImageSlot__overlay">
             <FontAwesomeIcon icon={camera} className="ImageSlot__camera" />
             <p className="ImageSlot__prompt">Add image</p>
