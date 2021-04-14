@@ -13,6 +13,7 @@ const ImageSlot = props => {
   const { itemImages, setItemImages } = state;
   const [imageUrl, setImageUrl] = useState('');
   const [error, setError] = useState(false);
+  const [deleteToken, setDeleteToken] = useState('');
 
   useEffect(() => {
     setImageUrl(itemImages[slot - 1] || '');
@@ -32,10 +33,10 @@ const ImageSlot = props => {
   };
 
   const handleFileChange = e => {
-    const url = 'https://api.cloudinary.com/v1_1/dnxtp3xmi/upload';
+    const url = 'https://api.cloudinary.com/v1_1/charlies-closet/upload';
     const file = e.target.files[0];
     const formData = new FormData();
-    formData.append('upload_preset', 'trading-app');
+    formData.append('upload_preset', 'charlies-images');
     formData.append('file', file);
     fetch(url, {
       method: 'POST',
@@ -44,6 +45,7 @@ const ImageSlot = props => {
       .then(response => response.json())
       .then(data => {
         addImageUrl(itemImages, data.secure_url, slot - 1);
+        setDeleteToken(data.delete_token);
       })
       .catch(() => {
         setError(true);
@@ -51,6 +53,15 @@ const ImageSlot = props => {
   };
 
   const handleDeleteClick = () => {
+    const url = 'https://api.cloudinary.com/v1_1/charlies-closet/delete_by_token';
+    const formData = new FormData();
+    formData.append('token', deleteToken);
+    fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => response.json())
+      .catch(() => setError(true));
     removeImageUrl(itemImages, imageUrl);
     setImageUrl('');
   };
