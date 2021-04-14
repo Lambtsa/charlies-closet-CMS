@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { getAllItems } from '../modules/api-service';
 
 import ItemCard from '../components/ItemCard';
 import SnackBar from '../components/SnackBar';
 
 const Items = () => {
+  const history = useHistory();
   const [itemList, setItemList] = useState([]);
   const [error, setError] = useState(false);
 
@@ -17,7 +18,6 @@ const Items = () => {
         setError(true);
       } else {
         const data = await response.json();
-        console.log(data);
         setItemList(data);
       }
     } catch (err) {
@@ -29,6 +29,7 @@ const Items = () => {
     <>
       {!error && itemList && itemList.map(item => <ItemCard itemDetails={item} key={item._id} />)}
       <div className="btn__container">
+        <button className="btn btn__secondary" type="button" onClick={() => history.push('/')}>Back</button>
         <Link className="btn btn__primary" to="/new-item">Add new</Link>
       </div>
       {error && <SnackBar state={error} setState={setError} type="error" message="There are no items yet." />}

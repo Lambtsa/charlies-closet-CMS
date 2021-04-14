@@ -101,6 +101,11 @@ main {
     color: $white;
   }
 }
+.btn__close {
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
+}
 /*
   Form Component
 */
@@ -123,6 +128,65 @@ main {
     resize: none;
     height: 100px;
   }
+}
+/*
+  ImageSlot 
+*/
+.form__img--container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+.input__img-wrapper--empty {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border: 1px solid $grey;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.input__img-wrapper--full {
+  position: relative;
+  height: 150px;
+}
+.ImageSlot__input {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.ImageSlot__overlay {
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: $grey;
+  gap: 0.5rem;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.ImageSlot__prompt {
+  font-size: 0.9rem;
+  color: $grey;
+}
+.ImageSlot__camera {
+  font-size: 1.5rem;
+}
+.input__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
 }
 /*
   ItemCard Component

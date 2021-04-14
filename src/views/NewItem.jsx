@@ -3,12 +3,13 @@ import { useHistory } from 'react-router-dom';
 import { addNewItem } from '../modules/api-service';
 
 import SnackBar from '../components/SnackBar';
+import ImageSlot from '../components/ImageSlot';
 
 const NewItem = () => {
   const history = useHistory();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [itemImages, setItemImages] = useState([]);
   const [gender, setGender] = useState('');
   const [size, setSize] = useState('');
   const [category, setCategory] = useState('');
@@ -17,7 +18,6 @@ const NewItem = () => {
 
   const handleTitleChange = e => setTitle(e.target.value);
   const handleDescriptionChange = e => setDescription(e.target.value);
-  const handleImageUrlChange = e => setImageUrl(e.target.value);
   const handleGenderChange = e => setGender(e.target.value);
   const handleSizeChange = e => setSize(e.target.value);
   const handleCategoryChange = e => setCategory(e.target.value);
@@ -29,7 +29,7 @@ const NewItem = () => {
       const newItem = {
         itemTitle: title,
         itemDescription: description,
-        itemImages: [imageUrl],
+        itemImages,
         itemGender: gender,
         itemSize: size,
         itemCategory: category,
@@ -69,12 +69,11 @@ const NewItem = () => {
           placeholder="Enter description"
           value={description}
           onChange={handleDescriptionChange} />
-        <input
-          className="form__input"
-          type="url"
-          placeholder="Enter image url"
-          value={imageUrl}
-          onChange={handleImageUrlChange} />
+        <div className="form__img--container">
+          <ImageSlot state={{ itemImages, setItemImages }} itemTitle={title} slot="1" />
+          <ImageSlot state={{ itemImages, setItemImages }} itemTitle={title} slot="2" />
+          <ImageSlot state={{ itemImages, setItemImages }} itemTitle={title} slot="3" />
+        </div>
         <select className="form__input" value={gender} onChange={handleGenderChange}>
           <option value="">Select gender</option>
           <option value="boy">Boy</option>
