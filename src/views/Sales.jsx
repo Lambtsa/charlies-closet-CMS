@@ -1,8 +1,13 @@
 import React from 'react';
 
+import SideBar from '../components/SideBar';
+
 const Sales = () => (
   <>
-    <h2>Sales</h2>
+    <SideBar />
+    <section className="content__container">
+      <h2>Sales</h2>
+    </section>
   </>
 );
 

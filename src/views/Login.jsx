@@ -45,7 +45,7 @@ const SignInForm = () => {
   }
 
   return (
-    <>
+    <section className="login__container">
       <form className="form" onSubmit={handleFormSubmit}>
         <label className="form__label" htmlFor="username">
           Username
@@ -76,7 +76,7 @@ const SignInForm = () => {
           type="error"
           message="Oops! Something went wrong!" />
       )}
-    </>
+    </section>
   );
 };
 
