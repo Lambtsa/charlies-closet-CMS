@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle as deleteIcon, faCamera as camera } from '@fortawesome/free-solid-svg-icons';
 
 import SnackBar from './SnackBar';
+import Loader from './Loader';
 
 const ImageSlot = props => {
   const {
@@ -14,6 +15,7 @@ const ImageSlot = props => {
   const [imageUrl, setImageUrl] = useState('');
   const [error, setError] = useState(false);
   const [deleteToken, setDeleteToken] = useState('');
+  const [isLoading, setIsloading] = useState(false);
 
   useEffect(() => {
     setImageUrl(itemImages[slot - 1] || '');
@@ -33,6 +35,7 @@ const ImageSlot = props => {
   };
 
   const handleFileChange = e => {
+    setIsloading(true);
     const url = 'https://api.cloudinary.com/v1_1/charlies-closet/upload';
     const file = e.target.files[0];
     const formData = new FormData();
@@ -49,7 +52,8 @@ const ImageSlot = props => {
       })
       .catch(() => {
         setError(true);
-      });
+      })
+      .finally(() => setIsloading(false));
   };
 
   const handleDeleteClick = () => {
@@ -68,23 +72,26 @@ const ImageSlot = props => {
 
   return (
     <>
-      {imageUrl !== '' && (
-        <div className="input__img-wrapper--full">
-          <button className="btn__close" type="button" onClick={handleDeleteClick}>
-            <FontAwesomeIcon icon={deleteIcon} className="icon__delete" />
-          </button>
-          <img className="input__img" src={imageUrl} alt={itemTitle} />
-        </div>
-      )}
-      {imageUrl === '' && (
-        <div className="input__img-wrapper--empty">
-          <input className="ImageSlot__input" type="file" onChange={handleFileChange} accept="image/png, image/jpeg" multiple={false} />
-          <div className="ImageSlot__overlay">
-            <FontAwesomeIcon icon={camera} className="ImageSlot__camera" />
-            <p className="ImageSlot__prompt">Add image</p>
-          </div>
-        </div>
-      )}
+      <div className="input__img-wrapper">
+        {!isLoading && imageUrl !== '' && (
+          <>
+            <button className="btn__close" type="button" onClick={handleDeleteClick}>
+              <FontAwesomeIcon icon={deleteIcon} className="icon__delete" />
+            </button>
+            <img className="input__img" src={imageUrl} alt={itemTitle} />
+          </>
+        )}
+        {!isLoading && imageUrl === '' && (
+          <>
+            <input className="ImageSlot__input" type="file" onChange={handleFileChange} accept="image/png, image/jpeg" multiple={false} />
+            <div className="ImageSlot__overlay">
+              <FontAwesomeIcon icon={camera} className="ImageSlot__camera" />
+              <p className="ImageSlot__prompt">Add image</p>
+            </div>
+          </>
+        )}
+        {isLoading && <Loader />}
+      </div>
       {error && <SnackBar state={error} setState={setError} type="error" message="There was an error in uploading your image" />}
     </>
   );
