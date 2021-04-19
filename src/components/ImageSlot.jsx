@@ -41,6 +41,7 @@ const ImageSlot = props => {
     const formData = new FormData();
     formData.append('upload_preset', 'charlies-images');
     formData.append('file', file);
+    console.log(formData);
     fetch(url, {
       method: 'POST',
       body: formData,

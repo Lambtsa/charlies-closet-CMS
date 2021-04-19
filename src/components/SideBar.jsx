@@ -9,12 +9,10 @@ const SideBar = () => {
   const { oktaAuth, authState } = useOktaAuth();
   const [userDetails, setUserDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  console.log(oktaAuth.token);
 
   useEffect(async () => {
     if (authState.isAuthenticated) {
       const user = await oktaAuth.token.getUserInfo();
-      console.log(user);
       setUserDetails(user);
       setIsLoading(false);
     }
