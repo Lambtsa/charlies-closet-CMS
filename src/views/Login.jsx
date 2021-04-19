@@ -47,6 +47,7 @@ const SignInForm = () => {
   return (
     <section className="login__container">
       <form className="form" onSubmit={handleFormSubmit}>
+        <h2 className="form__title--centered">Charlie&apos;s closet</h2>
         <label className="form__label" htmlFor="username">
           Username
           <input
