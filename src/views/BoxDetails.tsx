@@ -1,14 +1,18 @@
 import React from 'react';
+
+/*
+  Components
+*/
 import AccountNavigation from '../components/AccountNavigation';
 
-const Dashboard = () => {
+const BoxDetails = () => {
   return (
     <>
       <AccountNavigation>
-        <h2>Dashboard</h2>
+        <h2>BoxDetails</h2>
       </AccountNavigation>
     </>
   )
 };
 
-export default Dashboard;
+export default BoxDetails;

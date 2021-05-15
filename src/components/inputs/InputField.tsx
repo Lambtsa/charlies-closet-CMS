@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
 interface InputFieldProps {
-  value: string,
+  value: any,
   class?: string,
   id?: string,
+  step?: number,
   label?: string,
   required?: boolean,
-  setValue: (arg: string) => void,
+  setValue: (arg: any) => void,
   type?: string,
   maxLength?: number,
   placeholder: string,
@@ -19,6 +20,12 @@ const InputField = (props: InputFieldProps) => {
   const handleValueChange = (e: any) => {
     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+    if (props.type === 'number' && e.target.value > 0) {
+      const number = Math.floor(e.target.value * 100);
+      const decimal = number / 100;
+      props.setValue(decimal);
+      return;
+    }
     if (props.type === 'email') {
       if (e.target.value && !regex.test(e.target.value)) {
         setError(true);
@@ -27,7 +34,7 @@ const InputField = (props: InputFieldProps) => {
         setError(false);
       }
     }
-    props.setValue(e.target.value.trim());
+    props.setValue(e.target.value.trim().toLowerCase());
   };
 
   return (
@@ -37,8 +44,10 @@ const InputField = (props: InputFieldProps) => {
         <input
           className="form__input"
           id={props.id}
+          step={props.step}
           autoComplete="none"
           value={props.value}
+          onWheel={ event => event.currentTarget.blur() } 
           onChange={handleValueChange}
           type={props.type}
           maxLength={props.maxLength}

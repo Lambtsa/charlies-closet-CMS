@@ -77,7 +77,7 @@ const useAuth = () => {
       })
       .then(async (responseData: any) => {
         setToken(responseData.token);
-        await setUserContext(responseData.token, '/dashboard');
+        await setUserContext(responseData.token, '/admin/dashboard');
       })
       .catch((err) => {
         console.log(err.message);

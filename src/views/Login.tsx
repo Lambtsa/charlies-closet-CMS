@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 /*
@@ -45,6 +46,10 @@ const Login = () => {
         <button className="form__btn" type="submit">Login</button>
         {error && <p className="form__error">Please provide valid credentials</p>}
       </form>
+      <footer className="footer__container">
+        {`© ${new Date().getFullYear()} Charlie's Closet. Tous droits réservés - `}
+        <Link className="footer__link" to="/">Live Website</Link>
+      </footer>
     </>
   )
 };

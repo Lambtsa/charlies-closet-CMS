@@ -1,14 +1,18 @@
 import React from 'react';
+
+/*
+  Components
+*/
 import AccountNavigation from '../components/AccountNavigation';
 
-const Dashboard = () => {
+const Users = () => {
   return (
     <>
       <AccountNavigation>
-        <h2>Dashboard</h2>
+        <h2>Users</h2>
       </AccountNavigation>
     </>
   )
 };
 
-export default Dashboard;
+export default Users;
