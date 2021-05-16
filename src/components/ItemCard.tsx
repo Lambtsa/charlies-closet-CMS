@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 interface ItemCardProps {
+  handleDeleteClick: (id: string) => void,
   itemObj: {
     _id: string,
     itemTitle: string,
@@ -11,16 +12,13 @@ interface ItemCardProps {
     itemSize: string,
     itemCategory: string,
     itemSeason: string,
-    itemPrice: string,
+    itemPrice: number,
   }
 }
 
 const ItemCard = (props: ItemCardProps) => {
-  const { itemObj } = props;
+  const { itemObj, handleDeleteClick } = props;
 
-  const handleDeleteClick = (e: any) => {
-
-  };
   return (
     <>
       <div className="itemcard__container">
@@ -32,10 +30,10 @@ const ItemCard = (props: ItemCardProps) => {
           </div>
         </div>
         <p className="itemcard__subtitle">{itemObj.itemGender}</p>
-        <p className="itemcard__subtitle">{itemObj.itemPrice}</p>
+        <p className="itemcard__subtitle">{`${(itemObj.itemPrice / 100)} €`}</p>
         <div className="itemcard__links">
           <Link className="itemcard__link" to={`/admin/items/${itemObj._id}`}>Edit</Link>
-          <button type="button" className="itemcard__link" onClick={handleDeleteClick}>Delete</button>
+          <button type="button" className="itemcard__link" onClick={() => handleDeleteClick(itemObj._id)}>Delete</button>
         </div>
       </div>
     </>

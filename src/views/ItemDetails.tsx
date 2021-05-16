@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
+import { ValidationContext } from '../hooks/ValidationContext';
 
 /*
   Components
@@ -7,13 +8,12 @@ import { useParams, Redirect } from 'react-router-dom';
 import AccountNavigation from '../components/AccountNavigation';
 import InputField from '../components/inputs/InputField';
 import SelectField from '../components/inputs/SelectField';
-import SnackBar from '../components/validation/SnackBar';
 import Loader from '../components/validation/Loader';
 
 const ItemDetails = () => {
   const { id } = useParams();
+  const { setError, isValid, setIsValid, setValidationMessage } = useContext(ValidationContext);
   const token = JSON.parse(localStorage.token);
-  const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [itemTitle, setItemTitle] = useState('');
   const [itemDescription, setItemDescription] = useState('');
@@ -22,17 +22,16 @@ const ItemDetails = () => {
   const [itemPrice, setItemPrice] = useState<number>(0);
   const [itemSize, setItemSize] = useState('');
   const [itemSeason, setItemSeason] = useState('');
-  const [isValid, setIsValid] = useState(false);
- 
-  useEffect(() => {
-    console.log(typeof itemPrice)
-  }, [itemPrice]);
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/items/${id}`)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('There has been an error getting this item');
+        }
+        return response.json();
+      })
       .then(data => {
-        console.log(data);
         setItemTitle(data.itemTitle);
         setItemCategory(data.itemCategory);
         setItemDescription(data.itemDescription);
@@ -41,7 +40,10 @@ const ItemDetails = () => {
         setItemSize(data.itemSize);
         setItemSeason(data.itemSeason);
       })
-      .catch(() => setError(true))
+      .catch((error) => {
+        setError(true);
+        setValidationMessage(error.message)
+      })
       .finally(() => setIsLoading(false));
       /* eslint-disable-next-line */
   }, [])
@@ -68,7 +70,6 @@ const ItemDetails = () => {
   }
 
   const handleSaveForm = () => {
-    console.log(typeof itemPrice);
     const newItemObj = {
       itemTitle,
       itemCategory,
@@ -90,10 +91,14 @@ const ItemDetails = () => {
       if (!response.ok) {
         throw new Error('This item could not be updated')
       }
+      setValidationMessage('The item has successfully been updated.')
       setIsValid(true);
     })
-      .catch(() => setError(true))
-      .finally(() => setIsLoading(false));
+      .catch(() => {
+        setValidationMessage('There has been an error in updating this item. Please try again.')
+        setError(true);
+        setIsLoading(false);
+      });
   };
 
   if (isValid) {
@@ -104,9 +109,7 @@ const ItemDetails = () => {
 
   return (
     <>
-      <AccountNavigation handleSaveForm={handleSaveForm}>
-        {isValid && <SnackBar type="success" message="This item has been updated successfully" state={isValid} setState={setIsValid} />}
-        {error && <SnackBar type="error" message="There has been an error getting this item" state={error} setState={setError} />}
+      <AccountNavigation previous="items" handleSaveForm={handleSaveForm}>
         {isLoading && <Loader />}
         <form className="form__container account">
           <h1 className="form__title">Item details</h1>

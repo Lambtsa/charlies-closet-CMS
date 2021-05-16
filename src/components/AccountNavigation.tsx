@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHamburger, faTimes } from '@fortawesome/free-solid-svg-icons';
 import useAuth from '../hooks/useAuth';
@@ -7,17 +7,25 @@ import { UserContext } from '../hooks/UserContext';
 
 interface AccountType {
   children: any,
+  previous?: string,
   handleSaveForm?: (e: any) => void,
 }
 
 const AccountNavigation = (props: AccountType) => {
-  const { children, handleSaveForm } = props;
+  const { children, handleSaveForm, previous } = props;
   const { logoutUser } = useAuth();
+  const history = useHistory();
   const { user } = useContext(UserContext);
   const [isClicked, setIsClicked] = useState(false);
 
   const handleBtnClick = () => {
     setIsClicked(!isClicked);
+  };
+
+  const handleCancelBtn = () => {
+    if (previous) {
+      history.push(`/admin/${previous}`);
+    }
   };
   
   return (
@@ -49,11 +57,12 @@ const AccountNavigation = (props: AccountType) => {
         </div>
         <div>
           {children}
-          {handleSaveForm && (
             <div className="btn__container account">
-              <button onClick={handleSaveForm} className="form__btn" type="submit">Save</button>
+              {previous && <button onClick={handleCancelBtn} className="form__btn back" type="button">Cancel</button>}
+              {handleSaveForm && (
+                <button onClick={handleSaveForm} className="form__btn" type="submit">Save</button>
+              )}
             </div>
-          )}
         </div>
       </section>
     </>
