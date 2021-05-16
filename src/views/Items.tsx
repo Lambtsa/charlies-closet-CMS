@@ -8,7 +8,6 @@ import AccountNavigation from '../components/AccountNavigation';
 import ItemCard from '../components/ItemCard';
 import Loader from '../components/validation/Loader';
 import PopupModal from '../components/PopupModal';
-import Filters from '../components/Filters';
 
 const Items = () => {
   const [items, setItems] = useState<any>([]);
@@ -17,6 +16,7 @@ const Items = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [checkValidation, setCheckValidation] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState('');
+  const [activeFilter, setActiveFilter] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:8080/api/items')
@@ -66,13 +66,18 @@ const Items = () => {
     setCheckValidation(false);
   }
 
-  const updateItems = (newItemsArray: any) => {
-    console.log('clicked');
-    setItems(newItemsArray);
-    console.log(newItemsArray)
+  const handleFilterClick = (filter: string) => {
+    setActiveFilter(filter);
+    const filteredItems = items.sort((a: any, b: any) => {
+      if (typeof a[`${filter}`] === 'number' || typeof a[`${filter}`] === 'number') {
+        return a[`${filter}`] - b[`${filter}`];
+      }
+      return a[`${filter}`].localeCompare(b[`${filter}`]);
+    });
+    setItems(filteredItems);
   };
 
-  const filters = {
+  const filters: any = {
     itemTitle: 'titre',
     itemPrice: 'prix',
     itemSize: 'taille',
@@ -87,7 +92,20 @@ const Items = () => {
         {!isLoading && (
           <div className="list__container">
             <h1 className="form__title">Items</h1>
-            <Filters filters={filters} items={items} updateItems={updateItems}/>
+            <div className="filters__container">
+              <div className="filters">
+                {Object.keys(filters).map((filter: string, index: number) => (
+                  <button
+                    key={index}
+                    className={`filters__btn ${activeFilter === filter ? 'active' : ''}`}
+                    type="button"
+                    onClick={() => handleFilterClick(filter)}>
+                      {`Par ${filters[filter]}`}
+                  </button>
+                ))}
+              </div>
+              <button className="filters__add" type="button">Add</button>
+            </div>
             {items.length > 0 && items.map((item: any) => (
               <ItemCard handleDeleteClick={handleDeleteClick} key={item._id} itemObj={item} />
             ))}

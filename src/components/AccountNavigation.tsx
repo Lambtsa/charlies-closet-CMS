@@ -48,7 +48,7 @@ const AccountNavigation = (props: AccountType) => {
           </div>
           <nav className="account__links">
             <NavLink activeClassName="account__link--selected" className="account__link" to="/admin/dashboard">Dashboard</NavLink>
-            <NavLink activeClassName="account__link--selected" className="account__link" to="/admin/sales">Sales</NavLink>
+            <NavLink activeClassName="account__link--selected" className="account__link" to="/admin/users">Users</NavLink>
             <NavLink activeClassName="account__link--selected" className="account__link" to="/admin/items">Items</NavLink>
             <NavLink activeClassName="account__link--selected" className="account__link" to="/admin/boxes">Boxes</NavLink>
             <button onClick={handleBtnClick} type="button" className="header__close"><FontAwesomeIcon icon={faTimes} /></button>
