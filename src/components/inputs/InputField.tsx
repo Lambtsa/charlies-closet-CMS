@@ -17,24 +17,54 @@ const InputField = (props: InputFieldProps) => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleValueChange = (e: any) => {
-    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (props.type === 'number' && e.target.value > 0) {
-      const number = Math.floor(e.target.value * 100);
-      const decimal = number / 100;
-      props.setValue(decimal);
-      return;
+  const handleOnBlur = (e: any) => {
+
+    if (e.target.value === '') {
+      setError(true);
+      setErrorMessage('Ce champ est obligatoire');
     }
-    if (props.type === 'email') {
-      if (e.target.value && !regex.test(e.target.value)) {
-        setError(true);
-        setErrorMessage('Veuillez saisir une adresse valide');
+    if (props.type === 'email' && e.target.value !== '' && !emailRegex.test(e.target.value)) {
+      setError(true);
+      setErrorMessage('Veuillez saisir une adresse valide');
+    }
+  }
+
+  const handleValueChange = (e: any) => {
+    
+    if (e.target.value) {
+      setError(false);
+    }
+    const textRegex = /^[A-Za-z0-9 \-'\.éèêâàöïç@_0-9]*$/;
+
+    if (props.type === 'tel') {
+      let formattedTel;
+      if (e.target.value.length > 0) {
+        formattedTel = e.target.value.match(/\d{1,2}/gi).join(' ');
       } else {
-        setError(false);
+        formattedTel = e.target.value.toString();
+      }
+      if (formattedTel.length <= 14) {
+        props.setValue(formattedTel);
       }
     }
-    props.setValue(e.target.value.trim().toLowerCase());
+    if (props.type === 'number') {
+      props.setValue(parseInt(e.target.value));
+    }
+    if (props.type === 'email') {
+      if (e.target.value > 0 && !emailRegex.test(e.target.value)) {
+        setError(true);
+        setErrorMessage('Veuillez saisir une adresse valide');
+      }
+      props.setValue(e.target.value.trim());
+    }
+    if (props.type === 'text' && textRegex.test(e.target.value)) {
+      props.setValue(e.target.value.trim());
+    }
+    if (props.type === 'password') {
+      props.setValue(e.target.value.trim());
+    }
   };
 
   return (
@@ -47,6 +77,7 @@ const InputField = (props: InputFieldProps) => {
           step={props.step}
           autoComplete="none"
           value={props.value}
+          onBlur={handleOnBlur}
           onWheel={ event => event.currentTarget.blur() } 
           onChange={handleValueChange}
           type={props.type}

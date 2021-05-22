@@ -33,22 +33,22 @@ const Login = () => {
           id="email"
           label="Email"
           type="email"
-          placeholder="Enter email"
+          placeholder="Email"
           value={email}
           setValue={setEmail} />
         <InputField
           id="password"
-          label="Password"
+          label="Mot de passe"
           type="password"
-          placeholder="Enter password"
+          placeholder="Mot de passe"
           value={password}
           setValue={setPassword} />
-        <button className="form__btn" type="submit">Login</button>
+        <button className="form__btn" type="submit">Se connecter</button>
         {error && <p className="form__error">Please provide valid credentials</p>}
       </form>
       <footer className="footer__container">
         {`© ${new Date().getFullYear()} Charlie's Closet. Tous droits réservés - `}
-        <Link className="footer__link" to="/">Live Website</Link>
+        <Link className="footer__link" to="/">Site live</Link>
       </footer>
     </>
   )
