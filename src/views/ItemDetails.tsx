@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import { ValidationContext } from '../hooks/ValidationContext';
+import baseApiUrl from '../helpers/api-service';
 
 /*
   Components
@@ -24,7 +25,7 @@ const ItemDetails = () => {
   const [itemSeason, setItemSeason] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/items/${id}`)
+    fetch(`${baseApiUrl}/items/${id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('There has been an error getting this item');
@@ -80,7 +81,7 @@ const ItemDetails = () => {
       itemSeason,
     };
     setIsLoading(true);
-    fetch(`http://localhost:8080/api/items/${id}`, {
+    fetch(`${baseApiUrl}/items/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',

@@ -1,10 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from './UserContext';
-
-const baseUrl = process.env.NODE_ENV === 'production'
-  ? 'https://charlies-closet-dev.herokuapp.com/api'
-  : 'http://localhost:8080/api';
+import baseApiUrl from '../helpers/api-service';
 
 interface Credentials {
   first_name: string,
@@ -26,7 +23,7 @@ const useAuth = () => {
   }, [token]);
 
   const setUserContext = async (accessToken: string, redirect: string) => {
-    await fetch(`${baseUrl}/auth/user`, {
+    await fetch(`${baseApiUrl}/auth/user`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -41,7 +38,7 @@ const useAuth = () => {
   };
 
   const registerUser = async (data: Credentials) => {
-    await fetch(`${baseUrl}/auth/register`, {
+    await fetch(`${baseApiUrl}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -62,7 +59,7 @@ const useAuth = () => {
   };
 
   const loginUser = async (data: { email: string, password: string }) => {
-    await fetch(`${baseUrl}/auth/login`, {
+    await fetch(`${baseApiUrl}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -86,7 +83,7 @@ const useAuth = () => {
   };
 
   const logoutUser = async () => {
-    await fetch(`${baseUrl}/auth/logout`, {
+    await fetch(`${baseApiUrl}/auth/logout`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

@@ -48,7 +48,7 @@ const Login = () => {
       </form>
       <footer className="footer__container">
         {`© ${new Date().getFullYear()} Charlie's Closet. Tous droits réservés - `}
-        <Link className="footer__link" to="/">Site live</Link>
+        <a className="footer__link" href="https://stockholm-family.com">Site live</a>
       </footer>
     </>
   )

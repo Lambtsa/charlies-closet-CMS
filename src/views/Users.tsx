@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { ValidationContext } from '../hooks/ValidationContext';
+import baseApiUrl from '../helpers/api-service';
 
 /*
   Components
@@ -17,7 +18,7 @@ const Users = () => {
   const [activeFilter, setActiveFilter] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/users')
+    fetch(`${baseApiUrl}/users`)
       .then(response => {
         if (!response.ok) {
           throw new Error('There has been an error getting the users');

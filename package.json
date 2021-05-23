@@ -28,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && scp -r ./build/* root@188.166.120.96:/var/www/admin/html"
   },
   "eslintConfig": {
     "extends": [

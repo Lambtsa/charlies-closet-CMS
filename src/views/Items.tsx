@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { ValidationContext } from '../hooks/ValidationContext';
+import baseApiUrl from '../helpers/api-service';
 
 /*
   Components
@@ -19,7 +20,7 @@ const Items = () => {
   const [activeFilter, setActiveFilter] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/items')
+    fetch(`${baseApiUrl}/items`)
       .then(response => {
         if (!response.ok) {
           throw new Error('There has been an error getting the items');
@@ -45,7 +46,7 @@ const Items = () => {
   }
   const handleValidateBtn = (id: string) => {
     setIsLoading(true);
-    fetch(`http://localhost:8080/api/items/${id}`, {
+    fetch(`${baseApiUrl}/items/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-type': 'application/json',

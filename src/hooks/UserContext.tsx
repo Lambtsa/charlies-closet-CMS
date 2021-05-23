@@ -1,8 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-
-const baseUrl = process.env.NODE_ENV === 'production'
-  ? 'https://charlies-closet-dev.herokuapp.com/api'
-  : 'http://localhost:8080/api';
+import baseApiUrl from '../helpers/api-service';
 
 const UserContext = createContext<any>(null);
 
@@ -13,7 +10,7 @@ const UserProvider = (props: {children: any }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const findUser = async () => {
-    await fetch(`${baseUrl}/auth/user`, {
+    await fetch(`${baseApiUrl}/auth/user`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
