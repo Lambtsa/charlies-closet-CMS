@@ -10,14 +10,16 @@ import AccountNavigation from '../components/AccountNavigation';
 import InputField from '../components/inputs/InputField';
 import SelectField from '../components/inputs/SelectField';
 import Loader from '../components/validation/Loader';
+import Images from '../components/inputs/Images';
 
 const ItemDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams<any>();
   const { setError, isValid, setIsValid, setValidationMessage } = useContext(ValidationContext);
   const token = JSON.parse(localStorage.token);
   const [isLoading, setIsLoading] = useState(true);
   const [itemTitle, setItemTitle] = useState('');
   const [itemDescription, setItemDescription] = useState('');
+  const [itemImages, setItemImages] = useState([]);
   const [itemGender, setItemGender] = useState('');
   const [itemCategory, setItemCategory] = useState('');
   const [itemPrice, setItemPrice] = useState<number>(0);
@@ -40,6 +42,7 @@ const ItemDetails = () => {
         setItemGender(data.itemGender);
         setItemSize(data.itemSize);
         setItemSeason(data.itemSeason);
+        setItemImages(data.itemImages);
       })
       .catch((error) => {
         setError(true);
@@ -137,6 +140,7 @@ const ItemDetails = () => {
               name="category"
               label="Catégorie"
               options={categoryOptions} />
+            <Images state={{ itemImages, setItemImages }} itemTitle={itemTitle} />
             <InputField
               id="price"
               step={0.01}
