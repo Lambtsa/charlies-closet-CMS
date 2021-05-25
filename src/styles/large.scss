@@ -93,7 +93,7 @@
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  background-color: rgba($secondary-color, .2);
+  background-color: rgba($primary-color, .2);
   padding: 1rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -101,4 +101,40 @@
   grid-column: 2;
   grid-row: 2 / span 3;
   gap: 1rem;
+}
+
+/* 
+  ImageSlot
+*/
+.form__image--container {
+  grid-column: 1 / span 2;
+  display: grid;
+  height: 290px;
+}
+.ImageSlot__container {
+  position: relative;
+  height: 290px;
+}
+.ImageSlot__input-wrapper {
+  height: 290px;
+}
+label {
+  &.description {
+    grid-column: 1 / span 2;
+    grid-row: 2 / span 2;
+  }
+}
+
+.ImageSlot__input {
+  height: 290px;
+}
+.ImageSlot__overlay {
+  height: 290px;
+}
+.btn__close {
+  position: absolute;
+  font-size: 1rem;
+  right: .5rem;
+  top: .5rem;
+  color: $primary-color;
 }

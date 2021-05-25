@@ -10,7 +10,7 @@ import AccountNavigation from '../components/AccountNavigation';
 import InputField from '../components/inputs/InputField';
 import SelectField from '../components/inputs/SelectField';
 import Loader from '../components/validation/Loader';
-import Images from '../components/inputs/Images';
+import ImageSlot from '../components/ImageSlot';
 
 const ItemDetails = () => {
   const { id } = useParams<any>();
@@ -78,6 +78,7 @@ const ItemDetails = () => {
       itemTitle,
       itemCategory,
       itemDescription,
+      itemImages,
       itemPrice: itemPrice * 100,
       itemGender,
       itemSize,
@@ -118,6 +119,11 @@ const ItemDetails = () => {
         <form className="form__container account">
           <h1 className="form__title">Item details</h1>
           <div className="split__container">
+            <div className="form__image--container">
+              <ImageSlot state={{ itemImages, setItemImages }} itemTitle={itemTitle} slot="1" />
+              <ImageSlot state={{ itemImages, setItemImages }} itemTitle={itemTitle} slot="2" />
+              <ImageSlot state={{ itemImages, setItemImages }} itemTitle={itemTitle} slot="3" />
+            </div>
             <InputField
               id="title"
               label="Titre"
@@ -140,7 +146,6 @@ const ItemDetails = () => {
               name="category"
               label="Catégorie"
               options={categoryOptions} />
-            <Images state={{ itemImages, setItemImages }} itemTitle={itemTitle} />
             <InputField
               id="price"
               step={0.01}

@@ -85,7 +85,7 @@ p {
   font-weight: 700;
 }
 .snackbar__success {
-  background-color: $secondary-color;
+  background-color: $success;
 }
 .snackbar__error {
   background-color: $red;
@@ -172,7 +172,7 @@ p {
   align-items: center;
   margin: 0 auto;
   padding: .6rem 1rem;
-  background-color: rgba($secondary-color, .2);
+  background-color: rgba($primary-color, .2);
   margin-bottom: 1rem;
   border-radius: 10px;
 }
@@ -236,7 +236,10 @@ p {
 .popup__buttons {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  .form__btn {
+    width: auto;
+  }
 }
 
 /*
@@ -279,7 +282,7 @@ textarea {
   padding: 1rem;  
   width: 100%;
   resize: none;
-  background-color: rgba($secondary-color, 0.2);
+  background-color: rgba($primary-color, 0.2);
   border-radius: 10px;
   color: $primary-color;
   border: 1px solid transparent;
@@ -297,7 +300,7 @@ textarea {
   padding: 1rem;  
   width: 100%;
   resize: none;
-  background-color: rgba($secondary-color, 0.2);
+  background-color: rgba($primary-color, 0.2);
   border-radius: 10px;
   color: $primary-color;
   border: 1px solid transparent;
@@ -320,8 +323,6 @@ label {
   }
   &.description {
     max-width: none;
-    grid-column: 1 / span 2;
-    grid-row: 2 / span 2;
     textarea {
       width: 100%;
       height: 250px;
@@ -349,7 +350,7 @@ label {
   }
 }
 .form__btn {
-  padding: 1rem;
+  padding: .5rem 1rem;
   background-color: $primary-color;
   border-radius: 10px;
   color: $white;
@@ -425,7 +426,7 @@ label {
   width: 100%;
   height: 100%;
   border-radius: 7px;
-  background-color: rgba($secondary-color, .2);
+  background-color: rgba($primary-color, .2);
   &.checked {
     background-color: $primary-color;
   }
@@ -467,7 +468,7 @@ select {
   appearance: none;
   width: 100%;
   margin-top: .2rem;
-  background-color: #E4E6CF;
+  background-color: #E3E8D1;
   border-radius: 10px;
   padding: 1rem;
   color: $primary-color;
@@ -477,7 +478,7 @@ select {
   width: 100%;
   max-width: 375px;
   border-radius: 10px;
-  background-color: rgba($secondary-color, .2);
+  background-color: rgba($primary-color, .2);
   padding: 1rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -494,7 +495,7 @@ input::-webkit-calendar-picker-indicator{
   border-radius: 10px;
   &:hover {
     transform: scale3d(1.1, 1.1, 1.1);
-    box-shadow: 0 0 4px rgba($secondary-color, .5);
+    box-shadow: 0 0 4px rgba($primary-color, .5);
   }
   &:nth-child(1) {
     background-color: #2A2927;
@@ -516,7 +517,7 @@ input::-webkit-calendar-picker-indicator{
   }
   &.selected {
     transform: scale3d(1.1, 1.1, 1.1);
-    box-shadow: 0 0 4px rgba($secondary-color, .5);
+    box-shadow: 0 0 4px rgba($primary-color, .5);
   }
 }
 .form__container {
@@ -545,73 +546,72 @@ input::-webkit-calendar-picker-indicator{
     margin: 1rem 0;
   }
 }
-.images {
-  grid-column: span 2;
-  width: 100%;
-  max-width: 100%;
-}
-.images__upload {
+.form__image--container {
   display: grid;
+  height: 150px;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  width: 100%;
-  flex-wrap: wrap;
+  gap: .5rem;
 }
-.images__container {
-  margin-top: .2rem;
-  display: flex;
+/*
+  ImageSlot 
+*/
+.ImageSlot__input-wrapper {
   position: relative;
-  flex-direction: column;
   width: 100%;
-  min-height: 150px;
-  max-height: 290px;
+  height: 150px;
+  background-color: rgba($primary-color, .2);
   border-radius: 10px;
-}
-.images__camera {
-  font-size: 1.5rem;
-}
-.images__img {
-  width: 100%;
-  height: 100%;
-  max-height: 290px;
-  border-radius: 10px;
-}
-.images__delete {
-  width: 1rem;
-  height: 1rem;
-  font-size: 1rem;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-.form__upload {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-}
-.images__overlay {
-  position: absolute;
-  z-index: 1000;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  // pointer-events: none;
-  background-color: rgba($secondary-color, .2);
-  cursor: pointer;
-  &:hover {
-    background-color: rgba($secondary-color, .4);
-    text-decoration: underline;
-  }
-}
-.images__title {
-  font-size: 1rem;
-  font-weight: 700;
+  overflow: hidden;
 }
 
+.ImageSlot__input {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 150px;
+  cursor: pointer;
+  opacity: 0;
+}
+.ImageSlot__overlay {
+  background-color: rgba($primary-color, .2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: $primary-color;
+  gap: 0.5rem;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 150px;
+  pointer-events: none;
+}
+.ImageSlot__prompt {
+  font-size: 0.9rem;
+  color: $primary-color;
+}
+.ImageSlot__camera {
+  font-size: 1.5rem;
+}
+.ImageSlot__container {
+  position: relative;
+  height: 150px;
+}
+.ImageSlot__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+.btn__close {
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
+  color: $primary-color;
+}
 /*
   Account Navigation
 */
@@ -658,7 +658,7 @@ input::-webkit-calendar-picker-indicator{
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-color: $secondary-color;
+    background-color: $primary-color;
     top: 0;
   }
 }
@@ -726,7 +726,7 @@ input::-webkit-calendar-picker-indicator{
     height: 100%;
     width: 100vw;
     padding: 2rem 0;
-    background-color: #E4E6CF;
+    background-color: #E3E8D1;
     border-radius: 0;
   }
 }
@@ -777,7 +777,7 @@ input::-webkit-calendar-picker-indicator{
   align-content: flex-start;
   width: 100%;
   .header__close {
-    color: $black;
+    color: $primary-color;
   }
 }
 .account__link {
@@ -787,11 +787,13 @@ input::-webkit-calendar-picker-indicator{
   text-align: center;
   font-size: 1.3rem;
   &:hover {
-    background-color: rgba($secondary-color, .5);
+    background-color: rgba($primary-color, .5);
+    color: darken($primary-color, 10%);
   }
   &--selected {
-    background-color: rgba($secondary-color, .5);
+    background-color: rgba($primary-color, .5);
     border-left: 5px solid $primary-color;
+    color: darken($primary-color, 10%);
   }
 }
 .account__logout {
@@ -804,7 +806,7 @@ input::-webkit-calendar-picker-indicator{
 */
 .itemcard__container {
   padding: 1rem;
-  background-color: rgba($secondary-color, .2);
+  background-color: rgba($primary-color, .2);
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
