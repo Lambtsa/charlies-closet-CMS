@@ -6,6 +6,7 @@ interface InputFieldProps {
   id?: string,
   step?: number,
   label?: string,
+  disabled?: boolean,
   required?: boolean,
   setValue: (arg: any) => void,
   type?: string,
@@ -36,7 +37,7 @@ const InputField = (props: InputFieldProps) => {
     if (e.target.value) {
       setError(false);
     }
-    const textRegex = /^[A-Za-z0-9 \-'\.éèêâàöïç@_0-9]*$/;
+    const textRegex = /^[A-Za-z0-9 \-'.éèêâàöïç@_0-9]*$/;
 
     if (props.type === 'tel') {
       let formattedTel;
@@ -76,6 +77,7 @@ const InputField = (props: InputFieldProps) => {
           id={props.id}
           step={props.step}
           autoComplete="none"
+          disabled={props.disabled}
           value={props.value}
           onBlur={handleOnBlur}
           onWheel={ event => event.currentTarget.blur() } 

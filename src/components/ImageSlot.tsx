@@ -16,6 +16,7 @@ const ImageSlot = (props: any) => {
 
   useEffect(() => {
     setImageUrl(itemImages[slot - 1] || '');
+    /* eslint-disable-next-line */
   }, [itemImages]);
 
   const addImageUrl = (array: any, url: any, imageNumber: any) => {

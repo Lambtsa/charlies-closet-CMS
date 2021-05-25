@@ -24,7 +24,7 @@ const PopupModal = (props: PopupProps) => {
       <div className="popup__container">
         <div className="popup__modal">
           <p className="popup__message">{popupMessage}</p>
-          <div className="popup__buttons">
+          <div className="btn__container">
             <button onClick={handleCancelBtn} className="form__btn back" type="button">{cancelText}</button>
             <button onClick={() => handleValidateBtn(id)} className="form__btn" type="button">{validateText}</button>
           </div>
