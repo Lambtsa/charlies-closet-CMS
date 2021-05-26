@@ -76,7 +76,7 @@ const Boxes = () => {
     const filteredBoxes = boxes.sort((a: any, b: any) => {
       setActiveFilter(filter);
       if (filter === 'price') {
-        return a.boxPrice = b.boxPrice;
+        return a.boxPrice - b.boxPrice;
       }
       if (filter === 'name') {
         return a.boxTitle.localeCompare(b.boxTitle);
