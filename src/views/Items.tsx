@@ -60,7 +60,6 @@ const Items = () => {
         setIsValid(true);
         setValidationMessage('Item deleted successfully');
         const filteredList = items.filter((item: any) => item._id !== id);
-        console.log(filteredList);
         setItems(filteredList);
       })
       .catch((error) => {
