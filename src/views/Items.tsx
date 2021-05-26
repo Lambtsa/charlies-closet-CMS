@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { ValidationContext } from '../hooks/ValidationContext';
 import baseApiUrl from '../helpers/api-service';
 
@@ -105,7 +106,7 @@ const Items = () => {
                   </button>
                 ))}
               </div>
-              <button className="filters__add" type="button">Add</button>
+              <Link className="filters__add" to="/admin/new-item">Add</Link>
             </div>
             {items.length > 0 && items.map((item: any) => (
               <ItemCard handleDeleteClick={handleDeleteClick} key={item._id} itemObj={item} />

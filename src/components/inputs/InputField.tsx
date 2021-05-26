@@ -37,7 +37,7 @@ const InputField = (props: InputFieldProps) => {
     if (e.target.value) {
       setError(false);
     }
-    const textRegex = /^[A-Za-z0-9 \-'.éèêâàöïç@_0-9]*$/;
+    const textRegex = /^[A-Za-z 0-9\-'.éèêâàöïç@_0-9]*$/;
 
     if (props.type === 'tel') {
       let formattedTel;
@@ -58,13 +58,13 @@ const InputField = (props: InputFieldProps) => {
         setError(true);
         setErrorMessage('Veuillez saisir une adresse valide');
       }
-      props.setValue(e.target.value.trim());
+      props.setValue(e.target.value);
     }
     if (props.type === 'text' && textRegex.test(e.target.value)) {
-      props.setValue(e.target.value.trim());
+      props.setValue(e.target.value);
     }
     if (props.type === 'password') {
-      props.setValue(e.target.value.trim());
+      props.setValue(e.target.value);
     }
   };
 

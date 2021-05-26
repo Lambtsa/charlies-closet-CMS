@@ -17,6 +17,7 @@ import Users from './views/Users';
 import UserDetails from './views/UserDetails';
 import ItemDetails from './views/ItemDetails';
 import BoxDetails from './views/BoxDetails';
+import NewItem from './views/NewItem';
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
               <SecureRoute path="/admin/users" component={Users} />
               <SecureRoute path="/admin/items/:id" component={ItemDetails} />
               <SecureRoute path="/admin/items" component={Items} />
+              <SecureRoute path="/admin/new-item" component={NewItem} />
               <SecureRoute path="/admin/boxes/:id" component={BoxDetails} />
               <SecureRoute path="/admin/boxes" component={Boxes} />
               <Route path="/" component={NotFound} />

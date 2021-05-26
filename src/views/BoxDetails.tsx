@@ -8,9 +8,7 @@ import baseApiUrl from '../helpers/api-service';
 */
 import AccountNavigation from '../components/AccountNavigation';
 import InputField from '../components/inputs/InputField';
-import SelectField from '../components/inputs/SelectField';
 import Loader from '../components/validation/Loader';
-import ImageSlot from '../components/ImageSlot';
 
 const BoxDetails = () => {
   const { id } = useParams<any>();
@@ -20,7 +18,7 @@ const BoxDetails = () => {
   const [boxTitle, setBoxTitle] = useState('');
   const [boxPrice, setBoxPrice] = useState(0);
   const [priceId, setPriceId] = useState('');
-  const [boxServices, setBoxServices] = useState([])
+  // const [boxServices, setBoxServices] = useState([])
 
   useEffect(() => {
     fetch(`${baseApiUrl}/boxes/${id}`)
@@ -43,10 +41,10 @@ const BoxDetails = () => {
       /* eslint-disable-next-line */
   }, [])
 
-  const genderOptions = {
-    'boy': 'Garçon',
-    'girl': 'Fille',
-  }
+  // const genderOptions = {
+  //   'boy': 'Garçon',
+  //   'girl': 'Fille',
+  // }
 
   const handleSaveForm = () => {
     const newItemObj = {

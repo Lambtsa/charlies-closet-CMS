@@ -6,19 +6,23 @@ import baseApiUrl from '../helpers/api-service';
   Components
 */
 import AccountNavigation from '../components/AccountNavigation';
-import ItemCard from '../components/ItemCard';
 import Loader from '../components/validation/Loader';
-import PopupModal from '../components/PopupModal';
 
 const Users = () => {
   const [users, setUsers] = useState<any>([]);
-  const { setError, setIsValid, setValidationMessage } = useContext(ValidationContext);
+  const { setError, setValidationMessage } = useContext(ValidationContext);
   const token = JSON.parse(localStorage.token);
   const [isLoading, setIsLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('');
 
   useEffect(() => {
-    fetch(`${baseApiUrl}/users`)
+    fetch(`${baseApiUrl}/users`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('There has been an error getting the users');
@@ -48,6 +52,8 @@ const Users = () => {
       if (filter === 'status') {
         return a.onboardingProgress.step.localeCompare(b.onboardingProgress.step);
       }
+      /* not sure about this */
+      return a - b;
     });
     setUsers(filteredUsers);
   };

@@ -81,6 +81,8 @@ const Boxes = () => {
       if (filter === 'name') {
         return a.boxTitle.localeCompare(b.boxTitle);
       }
+      /* not sure about this */
+      return a - b;
     });
     setBoxes(filteredBoxes);
   };
