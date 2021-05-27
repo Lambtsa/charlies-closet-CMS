@@ -95,5 +95,5 @@ export default InputField;
 
 InputField.defaultProps = {
   type: 'text',
-  maxLength: 30,
+  maxLength: 50,
 }
