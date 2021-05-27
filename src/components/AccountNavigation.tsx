@@ -32,7 +32,7 @@ const AccountNavigation = (props: AccountType) => {
     <>
       <header className="header account">
         <div className="header__container">
-          <Link to="/account/my-baby"><h2 className="header__logo">Charlie's closet</h2></Link>
+          <Link to="/admin/dashboard"><h2 className="header__logo">Charlie's closet</h2></Link>
           <button onClick={logoutUser} className="header__logout" type="button">Se déconnecter</button>
           <button type="button" onClick={handleBtnClick} className="header__icon" ><FontAwesomeIcon className="burger fixed" icon={faHamburger} /></button>
         </div>
