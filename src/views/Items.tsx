@@ -86,7 +86,6 @@ const Items = () => {
     itemPrice: 'prix',
     itemSize: 'taille',
     itemCategory: 'catégorie',
-    itemSeason: 'saison',
   }
 
   return (

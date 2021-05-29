@@ -148,9 +148,8 @@ const ItemDetails = () => {
               options={categoryOptions} />
             <InputField
               id="price"
-              step={0.01}
               label="Prix"
-              type="number"
+              type="text"
               value={itemPrice}
               setValue={setItemPrice}
               placeholder="Item price" />

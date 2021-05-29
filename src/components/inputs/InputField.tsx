@@ -6,8 +6,8 @@ interface InputFieldProps {
   id?: string,
   step?: number,
   label?: string,
-  disabled?: boolean,
   required?: boolean,
+  disabled?: boolean,
   setValue: (arg: any) => void,
   type?: string,
   maxLength?: number,
@@ -18,11 +18,12 @@ const InputField = (props: InputFieldProps) => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+
   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const handleOnBlur = (e: any) => {
 
-    if (e.target.value === '') {
+    if (e.target.value === '' && props.required) {
       setError(true);
       setErrorMessage('Ce champ est obligatoire');
     }
@@ -37,7 +38,7 @@ const InputField = (props: InputFieldProps) => {
     if (e.target.value) {
       setError(false);
     }
-    const textRegex = /^[A-Za-z 0-9\-'.éèêâàöïç@_0-9]*$/;
+    const textRegex = /^[A-Za-z0-9 \-'\.éèêâàöïç@_0-9]*$/;
 
     if (props.type === 'tel') {
       let formattedTel;
@@ -58,13 +59,13 @@ const InputField = (props: InputFieldProps) => {
         setError(true);
         setErrorMessage('Veuillez saisir une adresse valide');
       }
-      props.setValue(e.target.value);
+      props.setValue(e.target.value.trim());
     }
     if (props.type === 'text' && textRegex.test(e.target.value)) {
-      props.setValue(e.target.value);
+      props.setValue(e.target.value.trim());
     }
     if (props.type === 'password') {
-      props.setValue(e.target.value);
+      props.setValue(e.target.value.trim());
     }
   };
 
@@ -76,10 +77,10 @@ const InputField = (props: InputFieldProps) => {
           className="form__input"
           id={props.id}
           step={props.step}
-          autoComplete="none"
-          disabled={props.disabled}
           value={props.value}
+          autoComplete="off"
           onBlur={handleOnBlur}
+          disabled={props.disabled}
           onWheel={ event => event.currentTarget.blur() } 
           onChange={handleValueChange}
           type={props.type}
