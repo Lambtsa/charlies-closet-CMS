@@ -55,7 +55,7 @@ const AccountNavigation = (props: AccountType) => {
           </nav>
           <button onClick={logoutUser} className="account__logout" type="button">Se déconnecter</button>
         </div>
-        <div>
+        <div className="account__content">
           {children}
             <div className="btn__container account">
               {previous && <button onClick={handleCancelBtn} className="form__btn back" type="button">Cancel</button>}
